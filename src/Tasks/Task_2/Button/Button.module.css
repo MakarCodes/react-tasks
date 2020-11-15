@@ -1,0 +1,14 @@
+.LangBtn {
+  width: 100px;
+  height: 50px;
+  display: block;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.Icon {
+  width: 100px;
+  height: 50px;
+}
