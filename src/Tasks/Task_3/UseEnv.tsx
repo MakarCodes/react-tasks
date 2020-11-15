@@ -7,20 +7,49 @@
 // - informację czy dane urządzenie jest offline czy online
 
 import React, { useState, useEffect } from 'react';
+import useViewportSize from './useViewportSize';
+import { getBrowserName } from './utilities/getBrowserName';
+import { getConnectionStatus } from './utilities/getConnectionStatus';
+import { getDeviceName } from './utilities/getDeviceName';
+import { getSystemName } from './utilities/getSystemName';
+import { isTouchable } from './utilities/isTouchable';
 
 const UseEnv = () => {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+  const { width, height } = useViewportSize();
+  const [env, setEnv] = useState({
+    viewportWidth: width,
+    viewportHeight: height,
+    platform: window.navigator.platform,
+    device: getDeviceName(),
+    browser: getBrowserName(),
+    system: getSystemName(),
+    hasTouchableScreen: isTouchable(),
+    connectionStatus: getConnectionStatus(),
   });
-  const handleWindowResize = () =>
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-
-  useEffect(() => {});
-  return <div></div>;
+  useEffect(() => {
+    setEnv(prevEnv => ({
+      ...prevEnv,
+      viewportWidth: width,
+      viewportHeight: height,
+      device: getDeviceName(),
+    }));
+  }, [width, height]);
+  return (
+    <div>
+      <div>
+        <span>Width: {env.viewportWidth} px</span>
+      </div>
+      <div>
+        <span>Height: {env.viewportHeight} px</span>
+      </div>
+      <span>{env.platform}</span>
+      <span>{env.device}</span>
+      <span>{env.browser}</span>
+      <span>{env.system}</span>
+      <span>{env.hasTouchableScreen}</span>
+      <span>{env.connectionStatus}</span>
+    </div>
+  );
 };
 
 export default UseEnv;

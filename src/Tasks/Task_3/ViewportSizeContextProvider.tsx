@@ -20,7 +20,6 @@ const ViewportSizeContextProvider: React.FC<ReactNode> = ({ children }) => {
     height: window.innerHeight,
   });
   const handleWindowResize = () => {
-    console.log('effect resize');
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -28,16 +27,12 @@ const ViewportSizeContextProvider: React.FC<ReactNode> = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log('add event listener');
     window.addEventListener('resize', handleWindowResize);
     return () => {
       window.removeEventListener('resize', handleWindowResize);
-      console.log('remove');
     };
   }, []);
-  /* Now we are dealing with a context instead of a Hook, so instead
-     of returning the width and height we store the values in the
-     value of the Provider */
+
   return (
     <viewportSizeContext.Provider value={windowSize}>
       {children}
