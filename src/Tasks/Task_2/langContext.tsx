@@ -2,6 +2,7 @@ import React, { createContext, ReactNode, useState } from 'react';
 import { languageDescriptions, languageOptions } from './data';
 import { availableLanguages, LangContextProps } from './dataTypes';
 
+//test
 //The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
 const LangContext = createContext({
   userLanguage: 'pl',
