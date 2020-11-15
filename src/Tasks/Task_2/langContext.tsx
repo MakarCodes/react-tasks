@@ -1,32 +1,26 @@
 import React, { createContext, ReactNode, useState } from 'react';
-import { pl, en } from './data';
+import { languageDescriptions, languageOptions } from './data';
+import { availableLanguages, LangContextProps } from './dataTypes';
 
-const langs = { pl, en };
-const languageOptions = {
-  pl: 'pl',
-  en: 'en',
-};
 //The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
 const LangContext = createContext({
   userLanguage: 'pl',
-  currentDescription: langs.pl,
-  onLanguageChange: (selectedLang: availableLanguages) => {},
-});
-type availableLanguages = 'pl' | 'en';
+  currentDescription: languageDescriptions.pl,
+  languageChangeHandler: (selectedLang: availableLanguages) => {},
+} as LangContextProps);
 
 const LangContextProvider: React.FC<ReactNode> = ({ children }) => {
   const [userLanguage, setUserLanguage] = useState<availableLanguages>('pl');
 
-  const x = (selectedLang: availableLanguages) => {
-    console.log('working');
+  const languageChangeHandler = (selectedLang: availableLanguages) => {
     const newLanguage = languageOptions[selectedLang] ? selectedLang : 'pl';
     setUserLanguage(newLanguage);
   };
 
-  const provider = {
+  const provider: LangContextProps = {
     userLanguage,
-    currentDescription: langs[userLanguage],
-    onLanguageChange: x,
+    currentDescription: languageDescriptions[userLanguage],
+    languageChangeHandler,
   };
 
   return (

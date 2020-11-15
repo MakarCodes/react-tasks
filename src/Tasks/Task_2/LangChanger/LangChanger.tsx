@@ -6,12 +6,17 @@ import flagENIcon from '../images/Flag_of_the_United_Kingdom.svg';
 import { LangContext } from '../langContext';
 
 const LangChanger = () => {
-  const { onLanguageChange, userLanguage } = useContext(LangContext);
-  console.log(onLanguageChange, userLanguage);
+  const { languageChangeHandler } = useContext(LangContext);
   return (
     <div className={styles.Container}>
-      <Button icon={flagPLIcon} handleClick={() => onLanguageChange('pl')} />
-      <Button icon={flagENIcon} handleClick={() => onLanguageChange('en')} />
+      <Button
+        icon={flagPLIcon}
+        handleClick={() => languageChangeHandler('pl')}
+      />
+      <Button
+        icon={flagENIcon}
+        handleClick={() => languageChangeHandler('en')}
+      />
     </div>
   );
 };

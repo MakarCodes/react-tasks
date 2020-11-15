@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './Button.module.css';
-type availableLanguages = 'pl' | 'en';
 interface IProps {
-  icon: any;
-  handleClick: any;
+  icon: string;
+  handleClick: () => void;
 }
 
 const Button: React.FC<IProps> = ({ icon, handleClick }) => {

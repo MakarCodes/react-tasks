@@ -1,6 +1,6 @@
 import { IContent } from './dataTypes';
 
-export const pl: IContent = {
+const pl: IContent = {
   attention: {
     title: 'Dobrze, że jesteś, sprawdź to zadanie',
     subtitle: 'Pomoże Ci ogarnąć jak zmieniać język w apkach reacta',
@@ -12,7 +12,7 @@ export const pl: IContent = {
     action: '/new-subscriber?lang=pl',
   },
 };
-export const en: IContent = {
+const en: IContent = {
   attention: {
     title: 'Hey, check this task',
     subtitle: 'It can help You to learn how to change language in react app',
@@ -23,4 +23,11 @@ export const en: IContent = {
     ctaButton: 'To repository !!!',
     action: '/new-subscriber?lang=en',
   },
+};
+
+export const languageDescriptions = { pl, en };
+
+export const languageOptions = {
+  pl: 'pl',
+  en: 'en',
 };

@@ -1,3 +1,4 @@
+export type availableLanguages = 'pl' | 'en';
 export interface IContent {
   attention: {
     title: string;
@@ -9,4 +10,9 @@ export interface IContent {
     ctaButton: string;
     action: string;
   };
+}
+export interface LangContextProps {
+  userLanguage: availableLanguages;
+  currentDescription: IContent;
+  languageChangeHandler: (selectedLang: availableLanguages) => void;
 }
