@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { LangContext } from '../langContext';
+import { availableSctionName } from '../dataTypes';
 
-const NewsletterSection = () => {
+const NewsletterSection: React.FC = () => {
   const { currentDescription } = useContext(LangContext);
-  const sectionName = 'newsletter';
+  const sectionName: availableSctionName = 'newsletter';
   const { title, ctaButton, action } = currentDescription[sectionName];
   return (
     <form action={action}>

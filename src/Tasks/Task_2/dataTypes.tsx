@@ -1,4 +1,6 @@
 export type availableLanguages = 'pl' | 'en';
+
+export type availableSctionName = 'attention' | 'newsletter';
 export interface IContent {
   attention: {
     title: string;

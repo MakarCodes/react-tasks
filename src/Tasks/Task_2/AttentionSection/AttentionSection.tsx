@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { LangContext } from '../langContext';
+import { availableSctionName } from '../dataTypes';
 
-const AttentionSection = () => {
+const AttentionSection: React.FC = () => {
   const { currentDescription } = useContext(LangContext);
-  const sectionName = 'attention';
+  const sectionName: availableSctionName = 'attention';
   const { title, subtitle, ctaButton } = currentDescription[sectionName];
   return (
     <div>

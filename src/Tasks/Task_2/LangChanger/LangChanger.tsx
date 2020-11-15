@@ -5,7 +5,7 @@ import flagPLIcon from '../images/Flag_of_Poland.svg';
 import flagENIcon from '../images/Flag_of_the_United_Kingdom.svg';
 import { LangContext } from '../langContext';
 
-const LangChanger = () => {
+const LangChanger: React.FC = () => {
   const { languageChangeHandler } = useContext(LangContext);
   return (
     <div className={styles.Container}>
