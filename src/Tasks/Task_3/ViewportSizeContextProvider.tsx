@@ -10,6 +10,10 @@ export const viewportSizeContext = createContext({
   height: window.innerHeight,
 } as IVieportSizeContexProps);
 
+// const getWidth = () => window.innerWidth
+//   || document.documentElement.clientWidth
+//   || document.body.clientWidth;
+
 const ViewportSizeContextProvider: React.FC<ReactNode> = ({ children }) => {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
