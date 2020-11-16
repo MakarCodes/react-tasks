@@ -1,11 +1,22 @@
 import { useState, useEffect } from 'react';
-const FIRST_PAGE_IDX: number = 1;
-interface IUser {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+import { IUser } from '../dataTypes';
+
+interface IPaginationState {
+  actualPageIdx: number;
+  lastPageIdx: number;
+  entriesOnSelectedPage: () => IUser[];
+  isBusy: boolean;
 }
+interface IPaginationActions {
+  goToFirstPage: () => void;
+  goToPreviousPage: () => void;
+  goToPage: (pageNumber: number) => void;
+  goToNextPage: () => void;
+  goToLastPage: () => void;
+}
+
+type paginationTuple = [IPaginationState, IPaginationActions];
+const FIRST_PAGE_IDX: number = 1;
 
 const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {
   const [actualPageIdx, setActualPageIdx] = useState(FIRST_PAGE_IDX);
@@ -56,14 +67,14 @@ const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {
     );
   };
 
-  const paginationState = {
+  const paginationState: IPaginationState = {
     actualPageIdx,
     lastPageIdx,
     entriesOnSelectedPage,
     isBusy,
   };
 
-  const paginationActions = {
+  const paginationActions: IPaginationActions = {
     goToFirstPage,
     goToPreviousPage,
     goToPage,
@@ -71,7 +82,7 @@ const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {
     goToLastPage,
   };
 
-  return [paginationState, paginationActions];
+  return [paginationState, paginationActions] as paginationTuple;
 };
 
 export default usePagination;

@@ -9,7 +9,7 @@ interface IPaginationProps {
   };
   paginationActions: {
     goToFirstPage: () => void;
-    goToPrevPage: () => void;
+    goToPreviousPage: () => void;
     goToNextPage: () => void;
     goToLastPage: () => void;
     goToPage: (number: number) => void;
@@ -25,16 +25,18 @@ const Pagination: React.FC<IPaginationProps> = ({
     pagesNumbers.push(i);
   }
 
-  const pagesToRender = pagesNumbers.map(number => {
+  console.log(pagesNumbers);
+
+  const pagesToRender = pagesNumbers.map(number => (
     <button key={number} onClick={() => paginationActions.goToPage(number)}>
       {number}
-    </button>;
-  });
+    </button>
+  ));
   return (
     <div className={styles.PaginationWrapper}>
       <button onClick={paginationActions.goToFirstPage}>GO TO FIRST</button>
       <button
-        onClick={paginationActions.goToPrevPage}
+        onClick={paginationActions.goToPreviousPage}
         data-testid='goToPrevPage'
       >
         <i className='fas fa-chevron-left'></i>
