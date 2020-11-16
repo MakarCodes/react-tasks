@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 const FIRST_PAGE_IDX: number = 1;
+interface IUser {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
-const usePagination = (dataEntries: any, elementsOnPage: number = 20) => {
+const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {
   const [actualPageIdx, setActualPageIdx] = useState(FIRST_PAGE_IDX);
   const [isBusy, setIsBusy] = useState(false);
-  const lastPageIdx: number = Math.ceil(dataEntries / elementsOnPage);
+  const lastPageIdx: number = Math.ceil(dataEntries.length / elementsOnPage);
 
   useEffect(() => {
     setIsBusy(true);
@@ -15,7 +21,7 @@ const usePagination = (dataEntries: any, elementsOnPage: number = 20) => {
     };
   }, [actualPageIdx]);
 
-  const entriesOnSelectedPage = (): number => {
+  const entriesOnSelectedPage = (): IUser[] => {
     const firstElementIdxOnActualPage: number =
       (actualPageIdx - 1) * elementsOnPage;
     const lastElementIdxOnActualPage: number =
