@@ -1,21 +1,11 @@
 import { useState, useEffect } from 'react';
 import { IUser } from '../dataTypes';
+import {
+  IPaginationState,
+  IPaginationActions,
+  paginationTuple,
+} from '../dataTypes';
 
-interface IPaginationState {
-  actualPageIdx: number;
-  lastPageIdx: number;
-  entriesOnSelectedPage: () => IUser[];
-  isBusy: boolean;
-}
-interface IPaginationActions {
-  goToFirstPage: () => void;
-  goToPreviousPage: () => void;
-  goToPage: (pageNumber: number) => void;
-  goToNextPage: () => void;
-  goToLastPage: () => void;
-}
-
-type paginationTuple = [IPaginationState, IPaginationActions];
 const FIRST_PAGE_IDX: number = 1;
 
 const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {

@@ -1,19 +1,12 @@
 import React from 'react';
-import Button from '../../Task_2/Button/Button';
 import styles from './Pagination.module.css';
-
+import { IPaginationActions } from '../dataTypes';
 interface IPaginationProps {
   paginationState: {
     lastPageIdx: number;
     actualPageIdx: number;
   };
-  paginationActions: {
-    goToFirstPage: () => void;
-    goToPreviousPage: () => void;
-    goToNextPage: () => void;
-    goToLastPage: () => void;
-    goToPage: (number: number) => void;
-  };
+  paginationActions: IPaginationActions;
 }
 
 const Pagination: React.FC<IPaginationProps> = ({
@@ -25,30 +18,50 @@ const Pagination: React.FC<IPaginationProps> = ({
     pagesNumbers.push(i);
   }
 
-  console.log(pagesNumbers);
-
   const pagesToRender = pagesNumbers.map(number => (
-    <button key={number} onClick={() => paginationActions.goToPage(number)}>
+    <button
+      key={number}
+      onClick={() => paginationActions.goToPage(number)}
+      className={`${styles.PaginationBtn} ${
+        paginationState.actualPageIdx === number
+          ? styles.PaginationBtnActive
+          : ''
+      }`}
+    >
       {number}
     </button>
   ));
   return (
     <div className={styles.PaginationWrapper}>
-      <button onClick={paginationActions.goToFirstPage}>GO TO FIRST</button>
-      <button
-        onClick={paginationActions.goToPreviousPage}
-        data-testid='goToPrevPage'
-      >
-        <i className='fas fa-chevron-left'></i>
-      </button>
-      <div data-testid='goToPageButtons'>{pagesToRender}</div>
-      <button
-        onClick={paginationActions.goToNextPage}
-        data-testid='goToNextPage'
-      >
-        <i className='fas fa-chevron-right'></i>
-      </button>
-      <button onClick={paginationActions.goToLastPage}>GO TO LAST</button>
+      <div className={styles.ButtonsContainer}>
+        <button
+          onClick={paginationActions.goToFirstPage}
+          className={styles.PaginationBtn}
+        >
+          GO TO FIRST
+        </button>
+        <button
+          onClick={paginationActions.goToPreviousPage}
+          data-testid='goToPrevPage'
+          className={styles.PaginationBtn}
+        >
+          <span className={`${styles.Chevron} ${styles.ChevronLeft}`}></span>
+        </button>
+        <div data-testid='goToPageButtons'>{pagesToRender}</div>
+        <button
+          onClick={paginationActions.goToNextPage}
+          data-testid='goToNextPage'
+          className={styles.PaginationBtn}
+        >
+          <span className={`${styles.Chevron} ${styles.ChevronRight}`}></span>
+        </button>
+        <button
+          onClick={paginationActions.goToLastPage}
+          className={styles.PaginationBtn}
+        >
+          GO TO LAST
+        </button>
+      </div>
     </div>
   );
 };
