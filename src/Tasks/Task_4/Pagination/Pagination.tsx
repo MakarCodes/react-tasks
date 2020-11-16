@@ -38,7 +38,7 @@ const Pagination: React.FC<IPaginationProps> = ({
           onClick={paginationActions.goToFirstPage}
           className={styles.PaginationBtn}
         >
-          GO TO FIRST
+          FIRST PAGE
         </button>
         <button
           onClick={paginationActions.goToPreviousPage}
@@ -59,7 +59,7 @@ const Pagination: React.FC<IPaginationProps> = ({
           onClick={paginationActions.goToLastPage}
           className={styles.PaginationBtn}
         >
-          GO TO LAST
+          LAST PAGE
         </button>
       </div>
     </div>
