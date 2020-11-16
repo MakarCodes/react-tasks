@@ -11,7 +11,9 @@ const PaginationApp = () => {
   const [paginationState, paginationActions] = usePagination(dataEntries);
   return (
     <div className='App'>
-      <h2>Users</h2>
+      <h2 style={{ textAlign: 'center', margin: '10px 0' }}>
+        Users - pagination
+      </h2>
       {!paginationState.isBusy && (
         <PaginationTable
           dataEntries={paginationState.entriesOnSelectedPage()}

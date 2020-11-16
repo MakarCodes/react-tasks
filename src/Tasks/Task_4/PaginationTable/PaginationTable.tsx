@@ -20,7 +20,7 @@ const PaginationTable: React.FC<IProps> = ({ dataEntries }) => {
     <div>
       <div className={`${styles.tableStyle} ${styles.headStyle}`}>
         <p>No.</p>
-        <p>Name</p>
+        <p>Description</p>
       </div>
       <div data-testid='users'>{renderData()}</div>
     </div>

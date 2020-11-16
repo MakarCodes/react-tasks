@@ -27,7 +27,7 @@ const usePagination = (dataEntries: IUser[], elementsOnPage: number = 20) => {
       (actualPageIdx - 1) * elementsOnPage;
     const lastElementIdxOnActualPage: number =
       actualPageIdx === lastPageIdx
-        ? dataEntries.length - 1
+        ? dataEntries.length
         : firstElementIdxOnActualPage + elementsOnPage;
     return dataEntries.slice(
       firstElementIdxOnActualPage,
