@@ -31,7 +31,6 @@ const useSetState = (initialState: IState) => {
   const callbackRef = useRef(null) as React.MutableRefObject<any>;
 
   useEffect(() => {
-    console.log('[CHANGE of state]', state);
     if (callbackRef.current instanceof Function) {
       callbackRef.current();
     }
