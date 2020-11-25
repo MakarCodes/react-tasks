@@ -4,6 +4,7 @@ import TaskOne from './Tasks/Task_1/taskOne';
 import TaskTwo from './Tasks/Task_2/MultilangComponents';
 import TaskThree from './Tasks/Task_3/TaskThree';
 import TaskFour from './Tasks/Task_4/PaginationApp';
+import TaskFive from './Tasks/Task_5/PasswordInput';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <TaskTwo />
         <TaskThree />
         <TaskFour />
+        <TaskFive password='Kasztan123' onSuccess={() => console.log('Done')} />
       </ViewportSizeContextProvider>
     </div>
   );
