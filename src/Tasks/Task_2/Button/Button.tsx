@@ -7,7 +7,11 @@ interface IProps {
 
 const Button: React.FC<IProps> = ({ icon, handleClick }) => {
   return (
-    <button className={styles.LangBtn} onClick={handleClick}>
+    <button
+      data-testid='btn-id'
+      className={styles.LangBtn}
+      onClick={handleClick}
+    >
       <img src={icon} className={styles.Icon} alt='Flag icon' />
     </button>
   );
