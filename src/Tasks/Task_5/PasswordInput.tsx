@@ -6,6 +6,7 @@
 // - prop onSuccess zostaje wywołany jeśli wszystkie inputy uzupełnione, wraz z literami oraz ich pozycją, które wpisał user
 
 import React, { useState, useEffect } from 'react';
+import Input from './Input';
 import styles from './PasswordInput.module.css';
 import SingleInput from './SingleInput';
 
@@ -17,6 +18,7 @@ interface IPasswordInput {
 interface IFieldModel {
   idx: number;
   char: string | null;
+  handleChange?: any;
 }
 
 const MAX_PASSWORD_LENGTH: number = 24;
@@ -29,6 +31,8 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
       return { idx: idx, char: null };
     })
   );
+
+  const [userValues, setUserValues] = useState<any>(null);
 
   const generateRandomBlockedIdx = () => {
     const passwordLength: number = password.length;
@@ -76,6 +80,22 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
     console.log(allInputs);
   }, [allInputs]);
 
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // const name = e.currentTarget.name;
+    // const value = e.currentTarget.value;
+    // console.log(name, value);
+    // setUserValues({ [e.currentTarget.name]: e.currentTarget.value });
+    console.log('Submitted!', userValues);
+  };
+
+  const handleChange = (e: any) => {
+    setUserValues({
+      ...userValues,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
   return (
     <div>
       <div className={styles.InputsContainer}>
@@ -83,6 +103,14 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
           <SingleInput char={el.char} />
         ))}
       </div>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.InputsContainer}>
+          {allInputs.map(el => (
+            <Input char={el.char} idx={el.idx} handleChange={handleChange} />
+          ))}
+        </div>
+        <button type='submit'>Submit</button>
+      </form>
     </div>
   );
 };

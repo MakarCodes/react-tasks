@@ -1,0 +1,20 @@
+.SingleInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  color: red;
+  font-size: 24px;
+  font-weight: 700;
+  border: 2px solid red;
+  outline: none;
+}
+.SingleInput:not(:last-child) {
+  margin-right: 10px;
+}
+.SingleInputOpen {
+  background-color: lightblue;
+  border: 2px solid green;
+}
