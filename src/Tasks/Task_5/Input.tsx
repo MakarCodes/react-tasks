@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Input.module.css';
 
-interface IFieldModel {
+interface IInputFieldModel {
   idx: number;
   char: string | null;
-  handleChange: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<IFieldModel> = ({ char, idx, handleChange }) => {
+const Input: React.FC<IInputFieldModel> = ({ char, idx, handleChange }) => {
   const [value, setValue] = useState('');
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
   return (
     <input
       type='input'

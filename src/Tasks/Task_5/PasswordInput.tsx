@@ -18,7 +18,10 @@ interface IPasswordInput {
 interface IFieldModel {
   idx: number;
   char: string | null;
-  handleChange?: any;
+}
+
+interface IUserInputValues {
+  [key: string]: string;
 }
 
 const MAX_PASSWORD_LENGTH: number = 24;
@@ -31,8 +34,8 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
       return { idx: idx, char: null };
     })
   );
-
-  const [userValues, setUserValues] = useState<any>(null);
+  const [requiredValues, setrequiredValues] = useState<IUserInputValues>({});
+  const [userValues, setUserValues] = useState<IUserInputValues>({});
 
   const generateRandomBlockedIdx = () => {
     const passwordLength: number = password.length;
@@ -77,19 +80,31 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
   }, []);
 
   useEffect(() => {
-    console.log(allInputs);
+    const reqValues: any = allInputs
+      .filter(el => el.char !== null)
+      .reduce((obj: any, currValue: IFieldModel) => {
+        if (currValue.char !== null) {
+          const key = currValue.idx.toString();
+          const value = currValue.char;
+          // return Object.assign(obj, { [key]: value });
+          return { ...obj, ...{ [key]: value } };
+        }
+      }, {});
+    setrequiredValues(reqValues);
   }, [allInputs]);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const name = e.currentTarget.name;
-    // const value = e.currentTarget.value;
-    // console.log(name, value);
-    // setUserValues({ [e.currentTarget.name]: e.currentTarget.value });
-    console.log('Submitted!', userValues);
+    console.log(requiredValues);
+    console.log(userValues);
+    if (JSON.stringify(requiredValues) === JSON.stringify(userValues)) {
+      onSuccess();
+    } else {
+      console.log('Wrong password');
+    }
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserValues({
       ...userValues,
       [e.target.name]: e.target.value.trim(),

@@ -16,7 +16,7 @@ function App() {
         <TaskFour />
         <TaskFive
           password='Kasztan1234'
-          onSuccess={() => console.log('Done')}
+          onSuccess={() => console.log('Good job, your password is CORRECT!')}
         />
       </ViewportSizeContextProvider>
     </div>
