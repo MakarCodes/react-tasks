@@ -29,6 +29,7 @@ const generateRandomNumbers = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
+  // password validation ? (length between 8-24)
   const [allInputs, setAllInputs] = useState<IFieldModel[]>(
     [...Array(MAX_PASSWORD_LENGTH)].map((_, idx) => {
       return { idx: idx, char: null };
@@ -113,15 +114,20 @@ const PasswordInput: React.FC<IPasswordInput> = ({ password, onSuccess }) => {
 
   return (
     <div>
-      <div className={styles.InputsContainer}>
+      {/* <div className={styles.InputsContainer}>
         {allInputs.map(el => (
-          <SingleInput char={el.char} />
+          <SingleInput char={el.char} key={el.idx} />
         ))}
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit}>
-        <div className={styles.InputsContainer}>
+        <div className={styles.InputsContainer} data-testid='inputs-container'>
           {allInputs.map(el => (
-            <Input char={el.char} idx={el.idx} handleChange={handleChange} />
+            <Input
+              char={el.char}
+              idx={el.idx}
+              key={el.idx}
+              handleChange={handleChange}
+            />
           ))}
         </div>
         <button type='submit'>Submit</button>
